@@ -1,2 +1,5 @@
 # requirements.txt
-Flask==2.0.2
+# Flask==2.0.2
+fastapi
+uvicorn
+dns
