@@ -1,11 +1,18 @@
-from fastapi import FastAPI, HTTPException, Query
+from fastapi import FastAPI, HTTPException
 import time
 from dns import resolver
 
 app = FastAPI()
 
-@app.get("/dns-lookup")
-def perform_dns_lookup(domain: str = Query(..., min_length=1), server: str = Query(..., min_length=1)):
+@app.get("/dns-lookup/google")
+def perform_dns_lookup(domain: str = "github.com"):
+    server = "8.8.8.8"
+    response_time = dns_lookup(domain, server)
+    return {"domain": domain, "server": server, "response_time": 1000*response_time}
+
+@app.get("/dns-lookup/cloudflare")
+def perform_dns_lookup_(domain: str = "github.com"):
+    server = "1.1.1.1"
     response_time = dns_lookup(domain, server)
     return {"domain": domain, "server": server, "response_time": 1000*response_time}
 
